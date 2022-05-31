@@ -1,18 +1,18 @@
 function cipher(str, num) {
   let result = '';
   for (let i = 0; i < str.length; i++) {
-    let ascii = str[i].charCodeAt(str[i]);
-    ascii += num;
-    let ascii2 = (ascii + num) % 26;
-    console.log(ascii2);
-    result += String.fromCharCode(ascii);
+    let charCode = str.charCodeAt(i);
+    let codeStart;
+    if (charCode < 97) codeStart = 65;
+    else codeStart = 97;
+    if ((charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122)) {
+      let newLetter = String.fromCharCode(((charCode + num - codeStart) % 26) + codeStart);
+      result += newLetter;
+    } else {
+      result += str[i];
+    }
   }
   return result;
 }
+
 export default cipher;
-// For N from 1 to Text Length Do
-// Take C = Nth character of Text
-// Calculate R = the rank of C in the alphabet
-// Calculate R2 = (R + Shift) Modulo 26
-// Write the letter with rank R2 in the alphabet
-// End For Loop
